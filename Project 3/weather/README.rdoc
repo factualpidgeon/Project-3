@@ -1,0 +1,23 @@
+# Weather
+
+## About
+
+Sample Weather application by James Fitzsimmons.
+Updated by Beau Day and Paul Carr.
+
+## Setup
+
+	bundle install
+	rake db:drop
+	rake db:setup
+	rake weather:update_locations
+
+## Scraping
+
+	bundle exec crono RAILS_ENV=development
+
+## Viewing
+
+	rails s
+
+Go to `http://localhost:3000/`.

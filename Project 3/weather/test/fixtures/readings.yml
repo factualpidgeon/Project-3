@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  timestamp: 2015-05-30 14:34:10
+  rainfall: 1.5
+  temp: 1.5
+  windspeed: 1.5
+  winddirection: MyString
+  day_id: 
+
+two:
+  timestamp: 2015-05-30 14:34:10
+  rainfall: 1.5
+  temp: 1.5
+  windspeed: 1.5
+  winddirection: MyString
+  day_id: 
