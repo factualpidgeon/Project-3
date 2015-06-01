@@ -9,7 +9,7 @@ class LocationController < ApplicationController
   def json_index
     loc_data = Array.new
     Location.active_locations.each {|loc| loc_data << loc.data}
-    locs_output = {date: "", locations: loc_data}
+    locs_output = {date: Time.now.strftime("%d-%m-%Y"), locations: loc_data}
     render locs_output.to_json
   end
 

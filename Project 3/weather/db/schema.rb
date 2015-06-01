@@ -46,5 +46,6 @@ ActiveRecord::Schema.define(version: 20150530043410) do
   end
 
   add_index "readings", ["day_id"], name: "index_readings_on_day_id"
+  add_index "readings", ["created_at"], name: "index_readings_on_created_at"
 
 end
