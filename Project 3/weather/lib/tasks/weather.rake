@@ -34,6 +34,7 @@ namespace :weather do
       location.lat = lat
       location.lon = lon
       location.active = true
+      location.postcode = 0000 #TODO fix this
       location.save if location.changed?
 
       active_location_ids << location.id
@@ -48,7 +49,7 @@ namespace :weather do
     info_table = load_bom_info_table
     info_table.xpath("./tbody/child::*[child::th/a]").each do |row|
       name = row.xpath("./th/a").text
-      if location = Location.find_by(name: name, active: true)
+      if location = Location.find_by(loc_id: name, active: true)
         # Find the information.
         temp = row.xpath("./td[contains(@headers, 'obs-temp')]").text.to_f
         rain = row.xpath("./td[contains(@headers, 'obs-rainsince9am')]").text.to_f
@@ -56,7 +57,7 @@ namespace :weather do
         wind_dir_name = row.xpath("./td[contains(@headers, 'obs-wind-dir')]").text
         wind_dir = WIND_DIR_MAPPINGS[wind_dir_name.to_sym]
 	
-	day = Day.find_or_initialize_by(datestamp: Date.today)
+	day = Day.find_or_initialize_by(datestamp: Date.today, location: location)
 	day.location = location
 	day.save
 

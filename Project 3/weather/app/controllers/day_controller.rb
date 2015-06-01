@@ -13,8 +13,8 @@ class DayController < ApplicationController
     day_output = {date: t}
     if(params.key?(:location_id))
       location = Location.find_by loc_id: params[:location_id]
-      date = location.dates.last(:order => "created_at asc", :limit => 1)
-      last = date.readings.last(:order => "created_at asc", :limit => 1)
+      date = location.days.order("created_at").last
+      last = date.readings.order("created_at").last
       if((Time.now - last.created_at) / 1.minute > 30)
         day_output[:current_temp] = nil
         day_output[:current_cond] = nil
