@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<div class="navbar navbar-inverse" role="navigation">
+  <div class="navbar-header">
+    <div class="container">
+      <%= link_to("Locations", locations_path, class: 'navbar-brand') %>
+    </div>
+  </div>
+</div>
+
 <%= yield %>
 
 </body>
