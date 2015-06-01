@@ -1,5 +1,11 @@
 class DayController < ApplicationController
+  respond_to :json, :html
+
   def show
+    respond_to do |format|
+      format.html {} #TODO
+      format.json { self.json_show }
+    end
   end
 
   def json_show
@@ -28,6 +34,6 @@ class DayController < ApplicationController
       end
       day_output[:locations] = location_readings
     end
-    render day_output.to_json
+    respond_with( day_output.to_json )
   end
 end

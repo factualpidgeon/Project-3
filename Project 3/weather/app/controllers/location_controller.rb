@@ -1,16 +1,26 @@
 class LocationController < ApplicationController
+  respond_to :json, :html
+  
   def index
-    @locations = Location.active_locations
+    respond_to do |format|
+      format.html { @locations = Location.active_locations }
+      format.json { self.json_index }
+    end
+    
   end
 
   def predict
+    respond_to do |format|
+      format.html {  } #TODO
+      format.json { self.json_predict }
+    end
   end
 
   def json_index
     loc_data = Array.new
     Location.active_locations.each {|loc| loc_data << loc.data}
     locs_output = {date: Time.now.strftime("%d-%m-%Y"), locations: loc_data}
-    render locs_output.to_json
+    respond_with( locs_output.to_json )
   end
 
   def json_predict
@@ -34,6 +44,6 @@ class LocationController < ApplicationController
     predictions = Hash.new
     #TODO get predictions from predict class
     
-    render prediction_output.to_json
+    respnd_with( prediction_output.to_json )
   end
 end
