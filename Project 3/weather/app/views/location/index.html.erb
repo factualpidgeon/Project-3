@@ -6,10 +6,11 @@
     <th>Latitude</th>
     <th>Longitude</th>
   </tr>
+  <% t = Time.now.strftime("%d-%m-%Y") %>
   <% @locations.each do |location| %>
     <tbody>
       <tr>
-        <td><%= link_to(location.loc_id, "broken") %></td>
+        <td><%= link_to(location.loc_id, "/day/#{location.loc_id}/#{t}") %></td>
         <td><%= location.lat %></td>
         <td><%= location.lon %></td>
       </tr>

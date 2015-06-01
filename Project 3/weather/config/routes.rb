@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
+
   root 'location#index'
+  get 'day/:location_id/:date', to: 'day#show' 
+  get 'location/past/:post_code/:date', to: 'day#show'
+  get 'location/predict/:post_code/:period', to: 'location#predict'
+  get 'location/predict/:lat/:lon/:period', to: 'location#predict'
 
-  get 'location/id_date'
-
-  get 'location/pcode_date'
-
-  get 'location/pcode_predict'
-
-  get 'location/lat_lon_predict'
+  get 'weather/locations', to: 'location#json_index'
+  get 'weather/data/:location_id/:date', to: 'day#json_show'
+  get 'weather/data/:post_code/:date', to: 'day#json_show'
+  get 'weather/prediction/:post_code/:period', to: 'location#json_predict'
+  get 'weather/prediction/:lat/:long/:period', to: 'location#json_predict'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
