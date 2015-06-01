@@ -9,7 +9,7 @@
   <% @locations.each do |location| %>
     <tbody>
       <tr>
-        <td><%= link_to(location.name, location_readings_path(location)) %></td>
+        <td><%= link_to(location.loc_id, "broken") %></td>
         <td><%= location.lat %></td>
         <td><%= location.lon %></td>
       </tr>

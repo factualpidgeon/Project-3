@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'location/index'
+  root 'location#index'
 
   get 'location/id_date'
 

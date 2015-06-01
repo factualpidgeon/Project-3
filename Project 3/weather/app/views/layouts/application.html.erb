@@ -3,7 +3,7 @@
 <head>
   <title>Weather</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'defaults', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,11 +11,11 @@
 <div class="navbar navbar-inverse" role="navigation">
   <div class="navbar-header">
     <div class="container">
-      <%= link_to("Locations", locations_path, class: 'navbar-brand') %>
+      <%= link_to("Locations", "broken", class: 'navbar-brand') %>
     </div>
   </div>
 </div>
-
+<div class="container">
 <%= yield %>
 
 </body>
