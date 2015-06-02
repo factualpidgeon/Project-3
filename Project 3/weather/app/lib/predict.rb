@@ -1,6 +1,6 @@
 require 'matrix'
-
-class Predict
+module Predict
+class Pred
 		
 	def initialize(x, y)
 		@xs = x
@@ -27,4 +27,5 @@ class Predict
 		return predictions
 	end
 	
+end
 end

@@ -13,9 +13,9 @@ class LocationController < ApplicationController
     respond_to do |format|
       format.html do
         if(params.has_key?(:post_code))
-          latlon = [-37.83, 144.98]
+          latlon = Getlatlon.get(params[:post_code])
         else
-          latlon = [params[:lat], params[:lon]]
+          latlon = [params[:lat].to_f, params[:lon].to_f]
         end
         @location = get_nearest(latlon)
       end
@@ -33,21 +33,24 @@ class LocationController < ApplicationController
   def json_predict
     if(params.has_key?(:post_code))
       prediction_output = {postcode: params[:post_code]}
-      #TODO need to match lat/lon with postcode
-      latlon = [-37.83, 144.98]
+      latlon = Getlatlon.get(params[:post_code])
     else
-      prediction_output = {lattitude: params[:lat], longitude: params[:lon]}
-      latlon = [params[:lat], params[:lon]]
+      lat = params[:lat].to_f
+      lon = params[:lon].to_f
+      prediction_output = {lattitude: lat, longitude: lon}
+      latlon = [lat, lon]
     end
 
     location = get_nearest(latlon)
     
-    predictions = location.predict(params[:period]) #TODO
+    predictions = location.predict(params[:period].to_f)
     prediction_output[:predictions] = predictions
     respnd_with( prediction_output.to_json )
   end
 
   def get_nearest(latlon)
+    best_dist = nil
+    best_loc = nil
     Location.active_locations.each do |location|
       test = (location.lat - latlon[0])**2 + (location.lon - latlon[1])**2
       if(best_dist.nil? || (test < best_dist))

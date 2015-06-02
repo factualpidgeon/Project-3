@@ -15,11 +15,11 @@ class Location < ActiveRecord::Base
     temp = Array.new
     rainfall = Array.new
     windspeed = Array.new
-    day = Location.days.order("created_at DESC").limit(1).first
-    build_arrays(day, t, x, temp, rainfall, windspeed)
+    day = self.days.order("created_at DESC").limit(1).first
+    dir = build_arrays(day, t, x, temp, rainfall, windspeed)
     if(t.hour < 6)
-      day = Location.days.order("created_at DESC").offset(1).limit(1).first
-      build_arrays(day, t, x, temp, rainfall, windspeed, dir)
+      day = self.days.order("created_at DESC").offset(1).limit(1).first
+      build_arrays(day, t, x, temp, rainfall, windspeed)
     end
     
     p_temp = predict_array(x, temp, minutes)
@@ -38,10 +38,11 @@ class Location < ActiveRecord::Base
     return output
   end
 
-  def build_arrays(day, t, x, temp, rainfall, windspeed, dir)
+  def build_arrays(day, t, x, temp, rainfall, windspeed)
+    dir = nil
     backtime = -360
     best = backtime
-    day.readings.each |reading| do
+    day.readings.each do |reading|
       cur = (reading.timestamp - t) / 1.minute
       if( cur > backtime )
         x << cur
@@ -54,10 +55,11 @@ class Location < ActiveRecord::Base
         end
       end
     end
+    return dir
   end
 
   def predict_array(x, y, period)
-    p = Predict.new(x, y)
+    p = Predict::Pred.new(x, y)
     p.regres
     return p.gety(period)
   end

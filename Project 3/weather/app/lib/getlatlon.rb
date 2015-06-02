@@ -1,4 +1,5 @@
-def getlatlon(pcode)
+module Getlatlon
+def self.get(pcode)
 if pcode ==	3000	then return [	-37.814563	,	144.970267	] end
 if pcode ==	3001	then return [	-38.365017	,	144.76592	] end
 if pcode ==	3002	then return [	-37.81664	,	144.987811	] end
@@ -3127,4 +3128,5 @@ if pcode ==	3996	then return [	-38.632958	,	145.729641	] end
 if pcode ==	3996	then return [	-38.627873	,	145.808696	] end
 
 return [	-37.814563	,	144.970267	]
+end
 end
