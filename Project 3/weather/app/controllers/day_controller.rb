@@ -3,7 +3,16 @@ class DayController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html {} #TODO
+      format.html do
+        if(params.key?(:location_id)
+          @location = Location.find_by(loc_id: params[:location_id])
+          @day = @location.days.find_by(datestamp: params[:date].to_date)
+        else
+          @locations = Location.where(postcode: params[:postcode])
+	  @date = params[:date].to_date
+	  render 'show_postcode'#TODO make this view
+        end
+      end
       format.json { self.json_show }
     end
   end
@@ -21,7 +30,7 @@ class DayController < ApplicationController
       else
         day_output[:current_temp] = last.temp
 	#TODO add prediction for weather at T=0
-	day_output[:current_cond] = "sunny"
+	day_output[:current_cond] = last.cond
       end
       day_output[:measurements] = date.get_all
     else

@@ -26,6 +26,5 @@ class Predict
 		end
 		return predictions
 	end
-
 	
 end
