@@ -1,0 +1,24 @@
+<h1>Readings for <%= @location.name %></h1>
+
+<table class="table">
+  <tr>
+    <th>Time</th>
+    <th>Source</th>
+    <th>Rainfall (total since 9am)</th>
+    <th>Temperature (Celcius)</th>
+    <th>Wind Speed (km/h)</th>
+    <th>Wind Direction</th>
+  </tr>
+  <% @readings.order(:timestamp).each do |reading| %>
+    <tbody>
+      <tr>
+        <td><%= reading.timestamp.localtime %></td>
+        <td><%= reading.source.name %></td>
+        <td><%= reading.rainfall.round(2) %></td>
+        <td><%= reading.temperature %></td>
+        <td><%= reading.wind_speed %></td>
+        <td><%= reading.wind_dir %></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
