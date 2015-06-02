@@ -1,0 +1,13 @@
+-The weather class was removed as the ActiveRecord system in rails essentially serves the same purpose. (There is an access point into the many locations that exist already). All the methods that the weather class are already existant in the rails backend system.
+
+-The controller was split into two. This was because the showing of a single day's data fit better with rails in a day controller.
+
+-Some of the methods in the weather_controller class were removed because in rails they could be combined into one. Was consolidated into location#index (contains locations and html_locations), day#show (contains data_id_date, html_data_id_date, data_postcode_date, html_data_postcode_date), location#predict (contains predict_postcode, html_predict_postcode, predict_lat_lon, html_predict_lat_lon). This was done to prevent duplicate code.
+
+-Predict simply has one method to be called several times on different data sets. This is because the same regression technique was used on all data sets, so multiple methods for the same output would be redundant.
+
+-Date -> Day. Renamed due to conflicting namespace.
+
+-Time -> Reading. Renamed due to conflicting namespace.
+
+-The parser and scheduler were taken from the Project2 Sample solution. The method to add to db is essentially abstracted out via rails so is not needed. The parser was modified to fit with our data models, instead of using the Project2 Sample solution models.
