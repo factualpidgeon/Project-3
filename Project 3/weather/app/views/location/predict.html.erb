@@ -1,2 +1,22 @@
-<h1>Location#predict</h1>
-<p>Find me in app/views/location/predict.html.erb</p>
+# link to main page "back button"
+
+# if post code
+<h1>Predictions for <%= @location.name %></h1>
+# if lat/lon
+<h1>Predictions for <%= @lat %>, <%= @lon %></h1>
+
+<% future_times.for_each_with_index do |futureTimes n| %>
+<table class="table">
+  <tr><th><%=futureTimes%></th></tr>
+  <tr><th><%=Time.now + futureTimes*60 %></th></tr>
+  <tr><th><rain: <%=rain[n] %> %></th></tr>
+  <tr><th><probability: 1</th></tr>
+  <tr><th><temp: <%=temp[n] %> %></th></tr>
+  <tr><th><probability: 1</th></tr>
+  <tr><th><windspeed: <%=windspeed[n] %> %></th></tr>
+  <tr><th><probability: 1</th></tr>
+  <tr><th><wind direction : <%=winddirection[n] %> %></th></tr>
+  <tr><th><probability: 1</th></tr>
+  <% @readings.order(:timestamp).each do |reading| %>
+  <% end %>
+</table>
