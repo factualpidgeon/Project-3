@@ -4,7 +4,7 @@ class DayController < ApplicationController
   def show
     respond_to do |format|
       format.html do
-        if(params.key?(:location_id)
+        if(params.key?(:location_id))
           @location = Location.find_by(loc_id: params[:location_id])
           @day = @location.days.find_by(datestamp: params[:date].to_date)
         else
