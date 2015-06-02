@@ -14,8 +14,10 @@ class LocationController < ApplicationController
       format.html do
         if(params.has_key?(:post_code))
           latlon = Getlatlon.get(params[:post_code])
+          @pcode_flag = true
         else
           latlon = [params[:lat].to_f, params[:lon].to_f]
+          @pcode_flag = false
         end
         @location = get_nearest(latlon)
       end
