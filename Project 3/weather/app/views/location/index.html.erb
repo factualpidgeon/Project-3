@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Latitude</th>
     <th>Longitude</th>
+		<th>Predict</th>
   </tr>
   <% t = Time.now.strftime("%d-%m-%Y") %>
   <% @locations.each do |location| %>
@@ -13,6 +14,11 @@
         <td><%= link_to(location.loc_id, "/day/#{location.loc_id}/#{t}") %></td>
         <td><%= location.lat %></td>
         <td><%= location.lon %></td>
+				<td><%= link_to(10, "/day/#{location.loc_id}/#{t}") %></td>
+				<td><%= link_to(30, "/day/#{location.loc_id}/#{t}") %></td>
+				<td><%= link_to(60, "/day/#{location.loc_id}/#{t}") %></td>
+				<td><%= link_to(120, "/day/#{location.loc_id}/#{t}") %></td>
+				<td><%= link_to(180, "/day/#{location.loc_id}/#{t}") %></td>
       </tr>
     </tbody>
   <% end %>
